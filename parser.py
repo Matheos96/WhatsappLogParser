@@ -15,6 +15,7 @@ stop_date = ""
 def parse_lines():
     global start_date
     global stop_date
+    global my_dict
     i=0
     for line in file.readlines():
         if i==0:
@@ -30,12 +31,14 @@ def parse_lines():
     return i
 
 def outputInfo():
+    global my_dict
+    my_dict = [(k, my_dict[k]) for k in sorted(my_dict, key=my_dict.get, reverse=True)]
     string = ""
     summ = 0
-    for k,v in my_dict.items():
+    for k,v in my_dict:
         if(v>MIN_MSGS):
             summ+=v
-    for k,v, in my_dict.items():
+    for k,v, in my_dict:
         if (v>MIN_MSGS):
             print(k+":"+str(v)+" ("+str(round((v/float(summ))*100))+"%)")
     print("Total messages: "+str(summ)+"\n")
