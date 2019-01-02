@@ -8,9 +8,19 @@ my_dict = {}
 
 username_regex = r'-\s[^:]*[a-zA-Z]+[^:]*:'
 
-def countLines():
+start_date = ""
+
+stop_date = ""
+
+def parse_lines():
+    global start_date
+    global stop_date
     i=0
     for line in file.readlines():
+        if i==0:
+            start_date = line[0:11]
+        else:
+            stop_date = line[0:11]
         user = re.search(username_regex, line)
         if user is not None:
             user = user.group(0)
@@ -35,7 +45,9 @@ def outputInfo():
 print("\n------------ Welcome to Whatsapp Log Parser by Matheos Mattsson ------------\n")
 try:
     file = open(sys.argv[1], 'r', encoding="utf8")
-    print("Number of lines in file: "+str(countLines())+" (a long message can stretch over more than one line)\n")
+    print("Number of lines in file: "+str(parse_lines())+" (a long message can stretch over more than one line)\n")
+
+    print("Log for time interval: "+start_date+" to "+stop_date+"\n")
 
     print("---Messages/User---")
     outputInfo()
