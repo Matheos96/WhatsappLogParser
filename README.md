@@ -1,4 +1,4 @@
-# WhatsappLogParser
+# WhatsAppLogParser
 By Matheos Mattsson
 
 ## Requirements
