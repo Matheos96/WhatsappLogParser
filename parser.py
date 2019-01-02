@@ -1,6 +1,7 @@
 import sys
 import re
 
+#"Margin of error" --- This is the minimum amount of messages a "user" has to have to be conidered a user. This is required since the regex below might on special occasions match things in the chat messages too...
 MIN_MSGS = 5
 
 my_dict = {}
@@ -27,16 +28,18 @@ def outputInfo():
     for k,v, in my_dict.items():
         if (v>MIN_MSGS):
             print(k+":"+str(v)+" ("+str(round((v/float(summ))*100))+"%)")
+    print("Total messages: "+str(summ)+"\n")
             
 
 
 print("\n------------ Welcome to Whatsapp Log Parser by Matheos Mattsson ------------\n")
 try:
     file = open(sys.argv[1], 'r', encoding="utf8")
-    print("Number of lines in file: "+str(countLines())+"\n")
+    print("Number of lines in file: "+str(countLines())+" (a long message can stretch over more than one line)\n")
 
     print("---Messages/User---")
     outputInfo()
+    file.close()
 
 except Exception as e:
     print("No input file specified! Give the file as an argument: python parser.py 'path_to_file'")
