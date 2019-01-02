@@ -1,6 +1,8 @@
 import sys
 import re
 
+MIN_MSGS = 5
+
 my_dict = {}
 
 username_regex = r'-\s[^:]*[a-zA-Z]+[^:]*:'
@@ -16,6 +18,17 @@ def countLines():
         i = i+1
     return i
 
+def outputInfo():
+    string = ""
+    summ = 0
+    for k,v in my_dict.items():
+        if(v>MIN_MSGS):
+            summ+=v
+    for k,v, in my_dict.items():
+        if (v>MIN_MSGS):
+            print(k+":"+str(v)+" ("+str(round((v/float(summ))*100))+"%)")
+            
+
 
 print("\n------------ Welcome to Whatsapp Log Parser by Matheos Mattsson ------------\n")
 try:
@@ -23,12 +36,11 @@ try:
     print("Number of lines in file: "+str(countLines())+"\n")
 
     print("---Messages/User---")
-    for k,v in my_dict.items():
-        if(v>10):
-            print(k+":"+str(v))
+    outputInfo()
 
-except Exception:
+except Exception as e:
     print("No input file specified! Give the file as an argument: python parser.py 'path_to_file'")
+    print(str(e))
 
 
 
