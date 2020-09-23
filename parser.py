@@ -142,8 +142,8 @@ try:
     output_info()
     file.close()
 
-    print("\nWhat do you want to do?\nq = quit\n1 = Search for a word \n")
     while True:
+        print("\nWhat do you want to do?\nq = quit\n1 = Search for a word \n")
         if not user_option():
             break
 
